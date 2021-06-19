@@ -10,10 +10,10 @@ LABEL maintainer="dev@isi.pf"
 RUN set -o errexit -o nounset \
     && echo "Adding user1 user and group" \
     && groupadd --system --gid 1000 user1 \
-    && useradd --system --gid gradle --uid 1000 --shell /bin/bash --create-home user1 \
+    && useradd --system --gid user1 --uid 1000 --shell /bin/bash --create-home user1 \
     && echo "Adding user2 user and group" \
     && groupadd --system --gid 1001 user2 \
-    && useradd --system --gid gradle --uid 1001 --shell /bin/bash --create-home user2
+    && useradd --system --gid user2 --uid 1001 --shell /bin/bash --create-home user2
 
 
 #RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
