@@ -25,7 +25,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
 # Install WP-CLI
 RUN set -o errexit -o nounset \
     && echo "Install WP-CLI..." \
-    && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/local/bin/wp \
-    && chmod +x /usr/local/bin/wp \
-    && /usr/local/bin/wp --info
+    && curl  https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp \
+    && chmod +x /usr/bin/wp \
+    && /usr/bin/wp --info
 
