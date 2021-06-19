@@ -21,6 +21,8 @@ RUN set -o errexit -o nounset \
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
     && DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
        zlib1g-dev \
+       msmtp \
+       msmtp-mta \
 #       php-dev \
 #       php-pear \
 #      curl \
