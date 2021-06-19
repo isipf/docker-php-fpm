@@ -1,4 +1,4 @@
-FROM chialab/php-fpm:7.4
+FROM chialab/php:fpm-7.4
 LABEL maintainer="dev@isi.pf"
 
 # Version: 7.4

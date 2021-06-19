@@ -8,7 +8,8 @@ user1 (uid 1000) and user (uid 1001) are to be possible owners of the files, so 
 
 ## What does it come with ?
 
-- (directly derived from chialab/php-fpm)
+- (directly derived from chialab/php:fpm-7.4)
 - php-fpm
 - composer
 - wp-cli
+- msmtp mstmp-mta for contacting a mail relay (Postfix on another docker for example)
