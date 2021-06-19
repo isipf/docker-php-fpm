@@ -15,53 +15,12 @@ RUN set -o errexit -o nounset \
     && groupadd --system --gid 1001 user2 \
     && useradd --system --gid user2 --uid 1001 --shell /bin/bash --create-home user2
 
-
-#RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
-
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
     && DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
        zlib1g-dev \
        msmtp \
        msmtp-mta \
-#       php-dev \
-#       php-pear \
-#      curl \
-#      git \
-#      zip unzip \
-    && install-php-extensions \
-      grpc\
-# already installed:
-#      bcmath \
-#      bz2 \
-#      calendar \
-#      exif \
-#      gd \
-#      intl \
-#      ldap \
-#      memcached \
-#      mysqli \
-#      opcache \
-#      pdo_mysql \
-#      pdo_pgsql \
-#      pgsql \
-#      redis \
-#      soap \
-#      xsl \
-#      zip \
-#      sockets \
-#      iconv \
-#      mbstring \
-    && a2enmod rewrite
-
-# Install Composer.
-#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-#    && ln -s $(composer config --global home) /root/composer
-#ENV PATH=$PATH:/root/composer/vendor/bin COMPOSER_ALLOW_SUPERUSER=1
-
-# Install prestissimo (composer plugin). Plugin that downloads packages in parallel to speed up the installation process
-# After release of Composer 2.x, remove prestissimo, because parallelism already merged into Composer 2.x branch:
-# https://github.com/composer/composer/pull/7904
-#RUN composer global require hirak/prestissimo
+    && install-php-extensions grpc 
 
 # Install WP-CLI
 RUN set -o errexit -o nounset \
