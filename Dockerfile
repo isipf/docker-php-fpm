@@ -20,6 +20,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
        zlib1g-dev \
        msmtp \
        msmtp-mta \
+       locales locales-all \
     && install-php-extensions grpc 
 
 # Install WP-CLI
