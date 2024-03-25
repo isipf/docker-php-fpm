@@ -1,7 +1,7 @@
-FROM chialab/php:7.4-fpm
+FROM chialab/php:8.0-fpm
 LABEL maintainer="dev@isi.pf"
 
-# Version: 7.4
+# Version: 8.0
 
 # Download script to install PHP extensions and dependencies
 #ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
@@ -9,11 +9,11 @@ LABEL maintainer="dev@isi.pf"
 # user1:1000 and user2:1001
 RUN set -o errexit -o nounset \
     && echo "Adding user1 user and group" \
-    && groupadd --system --gid 1000 user1 \
-    && useradd --system --gid user1 --uid 1000 --shell /bin/bash --create-home user1 \
+    && groupadd --system --gid 1000 u1000 \
+    && useradd --system --gid u1000 --uid 1000 --shell /bin/bash --create-home u1000 \
     && echo "Adding user2 user and group" \
-    && groupadd --system --gid 1001 user2 \
-    && useradd --system --gid user2 --uid 1001 --shell /bin/bash --create-home user2
+    && groupadd --system --gid 1001 u1001 \
+    && useradd --system --gid u1001 --uid 1001 --shell /bin/bash --create-home u1001
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
     && DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
