@@ -8,10 +8,10 @@ LABEL maintainer="dev@isi.pf"
 
 # user1:1000 and user2:1001
 RUN set -o errexit -o nounset \
-    && echo "Adding user1 user and group" \
+    && echo "Adding u1000 user and group" \
     && groupadd --system --gid 1000 u1000 \
     && useradd --system --gid u1000 --uid 1000 --shell /bin/bash --create-home u1000 \
-    && echo "Adding user2 user and group" \
+    && echo "Adding u1001 user and group" \
     && groupadd --system --gid 1001 u1001 \
     && useradd --system --gid u1001 --uid 1001 --shell /bin/bash --create-home u1001
 
