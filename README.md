@@ -13,3 +13,4 @@ u1000 (uid 1000) and u1001 (uid 1001) are to be possible owners of the files, so
 - composer
 - wp-cli
 - msmtp mstmp-mta for contacting a mail relay (Postfix on another docker for example)
+

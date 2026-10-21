@@ -1,7 +1,7 @@
-FROM chialab/php:8.2-fpm
+FROM chialab/php:8.3-fpm
 LABEL maintainer="dev@isi.pf"
 
-# Version: 8.0
+# Version: 8.3
 
 # Download script to install PHP extensions and dependencies
 #ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
