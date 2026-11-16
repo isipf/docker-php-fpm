@@ -15,13 +15,18 @@ RUN set -o errexit -o nounset \
     && groupadd --system --gid 1001 u1001 \
     && useradd --system --gid u1001 --uid 1001 --shell /bin/bash --create-home u1001
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+       libbrotli1 \
        zlib1g-dev \
        msmtp \
        msmtp-mta \
-       locales locales-all \
-    && install-php-extensions grpc 
+       locales locales-all; \
+    dpkg-query -W -f='${Package} ${Version}\n' libbrotli1; \
+    rm -rf /var/lib/apt/lists/*
+
+RUN  install-php-extensions grpc 
 
 # Install WP-CLI
 RUN set -o errexit -o nounset \
