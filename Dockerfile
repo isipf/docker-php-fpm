@@ -1,10 +1,11 @@
-FROM chialab/php:8.3-fpm
+FROM php:8.3-fpm
 LABEL maintainer="dev@isi.pf"
 
 # Version: 8.3
 
 # Download script to install PHP extensions and dependencies
-#ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions
 
 # user1:1000 and user2:1001
 RUN set -o errexit -o nounset \
@@ -18,6 +19,9 @@ RUN set -o errexit -o nounset \
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
+       curl \
+       git \
+       zip unzip \
        libbrotli1 \
        zlib1g-dev \
        msmtp \
@@ -26,7 +30,42 @@ RUN set -eux; \
     dpkg-query -W -f='${Package} ${Version}\n' libbrotli1; \
     rm -rf /var/lib/apt/lists/*
 
-RUN  install-php-extensions grpc 
+# Extensions from chialab/docker-php (iconv, mbstring and pdo_sqlite are already built-in) + grpc
+RUN install-php-extensions \
+      amqp \
+      bcmath \
+      bz2 \
+      calendar \
+      event \
+      exif \
+      gd \
+      gettext \
+      imagick \
+      intl \
+      ldap \
+      memcached \
+      mysqli \
+      opcache \
+      pdo_mysql \
+      pdo_pgsql \
+      pgsql \
+      redis \
+      soap \
+      sockets \
+      xsl \
+      zip \
+      grpc
+
+# Install Composer.
+ENV PATH=$PATH:/root/composer/vendor/bin \
+  COMPOSER_ALLOW_SUPERUSER=1 \
+  COMPOSER_HOME=/root/composer
+RUN cd /opt \
+    && curl -sSL https://getcomposer.org/installer > composer-setup.php \
+    && curl -sSL https://composer.github.io/installer.sha384sum > composer-setup.sha384sum \
+    && sha384sum --check composer-setup.sha384sum \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer --2 \
+    && rm /opt/composer-setup.php /opt/composer-setup.sha384sum
 
 # Install WP-CLI
 RUN set -o errexit -o nounset \
